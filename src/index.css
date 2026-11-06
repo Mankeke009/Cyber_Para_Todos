@@ -1,0 +1,224 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+.cpt-dialog {
+  margin: auto;
+  padding: 0;
+  width: min(1100px, calc(100vw - 1.5rem));
+  max-width: none;
+  max-height: calc(100dvh - 1.5rem);
+  overflow: auto;
+}
+.cpt-dialog::backdrop { background: rgb(0 0 0 / .78); }
+.cpt-dialog-wide { width: min(1360px, calc(100vw - 1.5rem)); }
+.cpt-presentation-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: clamp(16rem, 58dvh, 46rem);
+  min-width: 0;
+  overflow: hidden;
+}
+.cpt-presentation-stage canvas { max-width: 100%; max-height: 100%; }
+.cpt-slide-enter { animation: cpt-slide-appear 240ms ease-out; }
+@keyframes cpt-slide-appear { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .cpt-slide-enter { animation: none; } }
+.cpt-input {
+  display: block;
+  width: 100%;
+  padding: .75rem;
+  border: 1px solid rgb(var(--line) / .3);
+  border-radius: .75rem;
+  background: rgb(var(--surface));
+  color: rgb(var(--fg));
+}
+
+/* Tailwind 4: los botones ya no muestran la manito por defecto */
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/* Tema oscuro (por defecto, según DESIGN.md) */
+:root {
+  --canvas: 10 10 10;
+  --surface: 22 22 22;
+  --glass: 212 212 212;
+  --fg: 237 237 237;
+  --fg2: 194 194 194;
+  --line: 229 229 229;
+  --cta: 255 255 255;
+  --cta-fg: 22 22 22;
+  --marker: 255 255 255;
+  color-scheme: dark;
+}
+
+/* Variante clara: extrapolación de las superficies invertidas del sistema */
+:root.light {
+  --canvas: 247 247 245;
+  --surface: 255 255 255;
+  --glass: 10 10 10;
+  --fg: 22 22 22;
+  --fg2: 82 82 82;
+  --line: 10 10 10;
+  --cta: 22 22 22;
+  --cta-fg: 255 255 255;
+  --marker: 22 22 22;
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-canvas text-fg font-dm antialiased;
+}
+
+::selection {
+  background: rgb(107 98 242 / 0.45);
+}
+
+/* ---------- Leaflet adaptado al sistema (sin sombras, hairlines, píldoras) ---------- */
+.leaflet-container {
+  font-family: inherit;
+  background: rgb(var(--canvas));
+}
+
+.leaflet-bar {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.leaflet-bar a {
+  background: rgb(var(--surface) / 0.9) !important;
+  color: rgb(var(--fg)) !important;
+  border: 1px solid rgb(var(--line) / 0.2) !important;
+  border-radius: 9999px !important;
+  margin-bottom: 6px;
+  width: 32px !important;
+  height: 32px !important;
+  line-height: 30px !important;
+}
+
+.leaflet-control-attribution {
+  background: rgb(var(--surface) / 0.7) !important;
+  color: rgb(var(--fg2)) !important;
+  font-size: 10px;
+}
+
+.leaflet-control-attribution a {
+  color: rgb(var(--fg)) !important;
+}
+
+/* Marcadores propios: punto + brillo violeta (Radial Spotlight) al activarse */
+.cpt-marker {
+  background: transparent;
+  border: none;
+  border-radius: 9999px;
+}
+
+.cpt-marker .halo {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  opacity: 0;
+  transition: opacity .25s;
+  background: radial-gradient(circle, rgba(107, 98, 242, .8) 0%, rgba(107, 98, 242, 0) 68%);
+}
+
+.cpt-marker .dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 9999px;
+  background: rgb(var(--marker));
+  border: 2px solid rgb(var(--canvas));
+  transition: transform .2s;
+}
+
+.cpt-marker.is-active .halo {
+  opacity: 1;
+}
+
+.cpt-marker.is-active .dot {
+  transform: scale(1.4);
+}
+
+/* Respaldo OSM en modo oscuro: OSM no ofrece tiles oscuros, se simulan con un filtro */
+.osm-dark .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9) saturate(0.6);
+}
+
+/* ---------- Accesibilidad ---------- */
+:focus-visible {
+  outline: 2px solid rgb(var(--fg));
+  outline-offset: 2px;
+}
+
+#top :focus-visible {
+  outline-color: #fff;
+}
+
+/* sobre el degradado del hero */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* El logo de la escuela es azul/rojo sobre transparente: en oscuro se invierte a blanco */
+.brand-logo-invert {
+  filter: brightness(0) invert(1);
+}
+
+:root.light .brand-logo-invert {
+  filter: none;
+}
+
+/* ---------- Tira de fotos del colegio (se desplaza hacia la izquierda) ---------- */
+@keyframes cpt-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.cpt-marquee-track {
+  animation: cpt-marquee var(--marquee-dur, 20s) linear infinite;
+}
+
+.cpt-marquee:hover .cpt-marquee-track,
+.cpt-marquee:focus-within .cpt-marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cpt-marquee {
+    overflow-x: auto !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
+
+  .cpt-marquee-track {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "rootId": "1tlQ_5zBrbWbrN8t2tSG23FykwDISdiJu",
+  "materialsId": "1Un1qJSVxwSD4N3GrRhUyd2mhr-geWvaC",
+  "schoolsId": "1ZGJH_FYI2wDlC5dAuUctx4SOJYaDfHIB",
+  "destinations": [
+    {
+      "key": "material-ciberacoso",
+      "label": "Ciberacoso",
+      "kind": "material",
+      "folderId": ""
+    },
+    {
+      "key": "material-grooming",
+      "label": "Grooming",
+      "kind": "material",
+      "folderId": ""
+    },
+    {
+      "key": "material-sexting-y-difusion-no-consentida",
+      "label": "Sexting y difusión no consentida",
+      "kind": "material",
+      "folderId": ""
+    },
+    {
+      "key": "material-suplantacion-de-identidad",
+      "label": "Suplantación de identidad",
+      "kind": "material",
+      "folderId": ""
+    },
+    {
+      "key": "material-exposicion-excesiva-de-informacion",
+      "label": "Exposición excesiva de información",
+      "kind": "material",
+      "folderId": ""
+    },
+    {
+      "key": "material-phishing-y-mensajes-enganosos",
+      "label": "Phishing y mensajes engañosos",
+      "kind": "material",
+      "folderId": ""
+    },
+    {
+      "key": "material-malware-y-aplicaciones-peligrosas",
+      "label": "Malware y aplicaciones peligrosas",
+      "kind": "material",
+      "folderId": ""
+    },
+    {
+      "key": "material-robo-de-cuentas-y-contrasenas",
+      "label": "Robo de cuentas y contraseñas",
+      "kind": "material",
+      "folderId": ""
+    },
+    {
+      "key": "material-estafas-en-videojuegos-y-redes-sociales",
+      "label": "Estafas en videojuegos y redes sociales",
+      "kind": "material",
+      "folderId": ""
+    },
+    {
+      "key": "material-enlaces-codigos-qr-y-descargas-maliciosas",
+      "label": "Enlaces, códigos QR y descargas maliciosas",
+      "kind": "material",
+      "folderId": ""
+    },
+    {
+      "key": "school-liceo-bicentenario-valparaiso",
+      "label": "Liceo Bicentenario Valparaíso",
+      "kind": "school",
+      "folderId": ""
+    },
+    {
+      "key": "school-colegio-san-ignacio",
+      "label": "Colegio San Ignacio",
+      "kind": "school",
+      "folderId": ""
+    },
+    {
+      "key": "school-escuela-villa-alemana",
+      "label": "Escuela Villa Alemana",
+      "kind": "school",
+      "folderId": ""
+    },
+    {
+      "key": "school-liceo-enrique-molina",
+      "label": "Liceo Enrique Molina",
+      "kind": "school",
+      "folderId": ""
+    },
+    {
+      "key": "school-colegio-cruz-del-norte",
+      "label": "Colegio Cruz del Norte",
+      "kind": "school",
+      "folderId": ""
+    }
+  ]
+}
